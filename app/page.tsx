@@ -2,112 +2,94 @@
 
 import { useState } from "react";
 
-const eras = [
-  { year:"c. 4th millennium BCE", place:"Ancient Egypt", title:"Adornment leaves traces", text:"Mineral pigments, oils and carefully made containers belong to a much older history than the modern word “makeup.” Egypt preserves some of the clearest surviving evidence of this tradition.", tag:"ORIGINS" },
-  { year:"c. 1887–1813 BCE", place:"Middle Kingdom Egypt", title:"Kohl becomes personal", text:"The Met records a kohl jar from the Middle Kingdom and notes that cosmetics were used by both men and women. Even the container could signal status.", tag:"EVERYDAY" },
-  { year:"c. 1550–1300 BCE", place:"New Kingdom Egypt", title:"A portable beauty kit", text:"Kohl tubes, sticks and other grooming tools appear together in archaeological contexts. Some containers were designed to be carried, closed and reused.", tag:"TOOLKIT" },
-  { year:"c. 1300–1080 BCE", place:"Ramesside Egypt", title:"Minerals become a palette", text:"Museum records describe eye paints made from materials including galena and malachite, ground into powder and prepared for application around the eyes.", tag:"MATERIALS" },
-  { year:"Today", place:"Everywhere", title:"The ritual becomes an industry", text:"Modern cosmetics are manufactured at enormous scale, but the underlying idea remains familiar: pigment, texture, scent and presentation used to shape appearance and identity.", tag:"NOW" }
+const surprises = [
+  { n:"01", big:"5.5 cm", title:"Tiny jar. Big story.", text:"A New Kingdom kohl jar from Hatnefer's tomb is only about 5.5 cm tall — and still contained traces of galena.", source:"The Met · Object 36.3.62" },
+  { n:"02", big:"4 + 1", title:"Ancient beauty kit.", text:"One surviving set included kohl, a razor, tweezers, a whetstone and a mirror. Yes — basically a compact grooming kit.", source:"The Met · Object 26.7.837-related" },
+  { n:"03", big:"MEN TOO", title:"It wasn't 'women's makeup'.", text:"The Met explicitly records cosmetics being used by both men and women in ancient Egypt.", source:"The Met · Object 16.1.36a,b" }
 ];
 
-const facts = [
-  ["No single inventor","There is no single person credited with inventing makeup. Cosmetic practices developed independently and changed across cultures and periods."],
-  ["Men wore it too","The Met explicitly notes that ancient Egyptian cosmetics were used by both men and women."],
-  ["The container mattered","Cosmetics were stored in purpose-made vessels, from practical tubes to highly crafted objects associated with status."],
-  ["Kohl was a material, not one formula","The word describes eye cosmetics made from different powdered materials; museum records document galena and malachite among them."]
+const eras = [
+  ["c. 1887–1813 BCE","MIDDLE KINGDOM","A royal kohl jar","Obsidian + gold. Small enough to fit in your hand, precious enough to signal status."],
+  ["c. 1550–1458 BCE","NEW KINGDOM","The beauty kit","Kohl, applicator, mirror, razor, tweezers and whetstone appear together."],
+  ["c. 1491–1473 BCE","NEW KINGDOM","Galena leaves a trace","A kohl jar from Hatnefer's tomb still held residue identified as galena."],
+  ["c. 1300–1080 BCE","RAMESSIDE","Two colours, two minerals","Museum records describe black galena and green malachite being prepared as eye paint."]
+];
+
+const materials = [
+  ["GALENA","BLACK","Lead-bearing mineral used in black eye cosmetics.","●"],
+  ["MALACHITE","GREEN","Mineral used to create green eye paint.","◆"],
+  ["OCHRE","EARTH","Natural earth pigment producing warm tones.","●"],
+  ["OILS","TEXTURE","Oils and unguents were part of ancient skin care.","✦"]
 ];
 
 const objects = [
-  { image:"https://collectionapi.metmuseum.org/api/collection/v1/iiif/543990/1228612/main-image", title:"Serpentinite Kohl Jar + Applicator", date:"New Kingdom · ca. 1492–1473 BCE", museum:"The Metropolitan Museum of Art", href:"https://www.metmuseum.org/art/collection/search/543990" },
-  { image:"https://collectionapi.metmuseum.org/api/collection/v1/iiif/547624/1228300/main-image", title:"Kohl Tube + Stick", date:"New Kingdom · ca. 1550–1458 BCE", museum:"The Metropolitan Museum of Art", href:"https://www.metmuseum.org/art/collection/search/547624" },
-  { image:"https://media.britishmuseum.org/media/Repository/Documents/2014_10/6_15/383bf5ca_0e15_4e2b_98b6_a3bc01047851/mid_00428968_001.jpg", title:"Ancient Egyptian Kohl Jar", date:"18th Dynasty", museum:"The British Museum", href:"https://www.britishmuseum.org/collection/object/Y_EA29336" }
+  { image:"https://collectionapi.metmuseum.org/api/collection/v1/iiif/543990/1228612/main-image", title:"Kohl Jar", date:"ca. 1491–1473 BCE", note:"Serpentinite + galena", href:"https://www.metmuseum.org/art/collection/search/543990" },
+  { image:"https://collectionapi.metmuseum.org/api/collection/v1/iiif/547624/1228300/main-image", title:"Kohl Tube + Stick", date:"ca. 1550–1458 BCE", note:"Wood + ivory + copper", href:"https://www.metmuseum.org/art/collection/search/547624" },
+  { image:"https://collectionapi.metmuseum.org/api/collection/v1/iiif/554687/1203907/main-image", title:"Blue Kohl Tube", date:"ca. 1550–1300 BCE", note:"Faience + gold + hematite", href:"https://www.metmuseum.org/art/collection/search/554687" }
 ];
 
 export default function Home() {
-  const [active, setActive] = useState(0);
-  const [open, setOpen] = useState<number | null>(null);
+  const [surprise, setSurprise] = useState(0);
+  const [era, setEra] = useState(0);
+  const [openMaterial, setOpenMaterial] = useState<number | null>(null);
 
   return <main>
     <nav className="nav">
       <a className="brand" href="#top"><span className="brand-mark">✦</span> ART OF ADORNMENT</a>
-      <div className="nav-links"><a href="#story">Story</a><a href="#objects">Objects</a><a href="#timeline">Timeline</a><a href="#materials">Materials</a></div>
-      <span className="edition">VOL. 02 · BEAUTY</span>
+      <div className="nav-links"><a href="#surprises">Wait, what?</a><a href="#objects">Objects</a><a href="#timeline">Timeline</a><a href="#palette">Palette</a></div>
+      <span className="edition">VOL. 03 · BEAUTY</span>
     </nav>
 
     <section id="top" className="hero">
-      <div className="hero-copy reveal">
-        <p className="eyebrow">A VISUAL HISTORY OF COSMETICS</p>
+      <div className="hero-copy">
+        <p className="eyebrow">THE HISTORY OF MAKEUP · IN 5 MINUTES</p>
         <h1>Who <em>invented</em><br/>makeup?</h1>
-        <p className="hero-sub">No one person did. The history of cosmetics is a long human experiment in pigment, ritual, identity and adornment — preserved in objects that still survive.</p>
-        <a className="scroll" href="#story"><span>↓</span> Enter the archive</a>
+        <p className="hero-sub">Spoiler: nobody. But the things humans did with pigment 3,000+ years ago? <strong>Way more interesting.</strong></p>
+        <a className="scroll" href="#surprises"><span>↓</span> Give me the good stuff</a>
       </div>
       <div className="hero-art">
-        <div className="hero-caption">FIG. 01<br/><span>A face imagined from the visual language of ancient adornment</span></div>
-        <div className="sun"/>
-        <div className="face"><div className="eye e1"/><div className="eye e2"/><div className="nose"/><div className="mouth"/></div>
+        <div className="hero-badge">MUSEUM<br/><b>ARCHIVE</b></div>
+        <div className="hero-caption">FIG. 01 · ANCIENT ADORNMENT</div>
+        <div className="sun"/><div className="face"><div className="eye e1"/><div className="eye e2"/><div className="nose"/><div className="mouth"/></div>
         <div className="ring r1"/><div className="ring r2"/>
-        <span className="anno a1">KOHL<br/><small>MINERAL PIGMENT</small></span>
-        <span className="anno a2">ADORNMENT<br/><small>IDENTITY + RITUAL</small></span>
+        <span className="anno a1">KOHL<br/><small>c. 1550 BCE</small></span>
+        <span className="anno a2">MINERAL<br/><small>+ OIL + TOOL</small></span>
       </div>
     </section>
 
-    <section id="story" className="intro">
-      <div className="section-num">01 / THE QUESTION</div>
-      <div className="reveal">
-        <p className="kicker">Forget the inventor myth.</p>
-        <h2>Makeup wasn't <i>invented.</i><br/>It <span>evolved.</span></h2>
-        <p className="lede">There is no single “first makeup.” People in different societies discovered ways to color, protect, scent and decorate the body using materials around them. Ancient Egypt gives us unusually rich surviving evidence — but it is one chapter in a much larger story.</p>
-        <div className="source-note">Museum records are the backbone of this page. The Met documents Egyptian kohl sticks, jars and portable cosmetic kits spanning the Middle and New Kingdoms. <a href="https://www.metmuseum.org/art/collection/search/560226" target="_blank" rel="noreferrer">Read the object record ↗</a></div>
+    <section id="surprises" className="surprises">
+      <div className="section-head compact"><div><p className="eyebrow">01 / BEFORE YOU SCROLL</p><h2>Three things<br/><i>you didn't expect.</i></h2></div><p>Real objects. Real museum records. Zero textbook energy.</p></div>
+      <div className="surprise-grid">
+        {surprises.map((s,i)=><button key={s.n} onClick={()=>setSurprise(i)} className={surprise===i?"surprise active":"surprise"}>
+          <span className="surprise-no">{s.n}</span><strong>{s.big}</strong><h3>{s.title}</h3><p>{s.text}</p><small>{s.source}</small>
+        </button>)}
       </div>
+      <div className="swipe-hint">TAP A CARD · FOLLOW THE RABBIT HOLE ↗</div>
     </section>
 
     <section id="objects" className="objects">
-      <div className="section-head">
-        <div><p className="eyebrow">02 / THE OBJECTS</p><h2>History you can<br/><i>hold in your hand.</i></h2></div>
-        <p>Instead of imagining an ancient beauty routine, look at the surviving objects. Their shapes, materials and wear make the story tangible.</p>
-      </div>
-      <div className="object-grid">
-        {objects.map((o,i)=><a className="object-card reveal" href={o.href} target="_blank" rel="noreferrer" key={o.title}>
-          <div className="object-image"><img src={o.image} alt={o.title}/><span>VIEW OBJECT ↗</span></div>
-          <div className="object-meta"><span>0{i+1}</span><span>{o.date}</span></div>
-          <h3>{o.title}</h3><p>{o.museum}</p>
-        </a>)}
-      </div>
+      <div className="section-head"><div><p className="eyebrow">02 / DON'T TAKE OUR WORD FOR IT</p><h2>Meet the<br/><i>evidence.</i></h2></div><p>These aren't illustrations. They're surviving objects from museum collections.</p></div>
+      <div className="object-grid">{objects.map((o,i)=><a className="object-card" href={o.href} target="_blank" rel="noreferrer" key={o.title}>
+        <div className="object-image"><img src={o.image} alt={o.title}/><span>OPEN MUSEUM RECORD ↗</span><b>0{i+1}</b></div>
+        <div className="object-meta"><span>{o.date}</span><span>{o.note}</span></div><h3>{o.title}</h3>
+      </a>)}</div>
     </section>
 
     <section id="timeline" className="timeline">
-      <div className="section-head"><div><p className="eyebrow">03 / THE LONG VIEW</p><h2>Five moments.<br/><i>One ancient ritual.</i></h2></div><p>Move through the timeline. Notice how the materials, containers and meanings of adornment changed.</p></div>
+      <div className="section-head compact"><div><p className="eyebrow">03 / THE RABBIT HOLE</p><h2>Follow the<br/><i>powder.</i></h2></div><p>Pick a moment. One click = one tiny historical detour.</p></div>
       <div className="timeline-layout">
-        <div className="years">{eras.map((e,i)=><button key={e.year} className={active===i?"year active":"year"} onClick={()=>setActive(i)}><span>{e.year}</span><b>{e.place}</b></button>)}</div>
-        <article className="era-card">
-          <div className="era-top"><span>{eras[active].tag}</span><span>{String(active+1).padStart(2,"0")} / 05</span></div>
-          <div className="era-body"><div className="era-number">{String(active+1).padStart(2,"0")}</div><div><p className="place">{eras[active].place}</p><h3>{eras[active].title}</h3><p>{eras[active].text}</p></div></div>
-          <div className="era-line"><span>◈</span><span>ADORNMENT · IDENTITY · RITUAL</span></div>
-        </article>
+        <div className="years">{eras.map((e,i)=><button key={e[0]} className={era===i?"year active":"year"} onClick={()=>setEra(i)}><span>{e[0]}</span><b>{e[1]}</b></button>)}</div>
+        <article className="era-card"><div className="era-top"><span>CASE FILE 0{era+1}</span><span>{eras[era][0]}</span></div><div className="era-body"><div className="era-number">0{era+1}</div><div><p className="place">{eras[era][1]}</p><h3>{eras[era][2]}</h3><p>{eras[era][3]}</p></div></div><a href="https://www.metmuseum.org/art/collection/search/560226" target="_blank" rel="noreferrer" className="case-link">OPEN THE MUSEUM TRAIL ↗</a></article>
       </div>
     </section>
 
-    <section id="materials" className="materials">
-      <div className="material-title"><p className="eyebrow">04 / THE PALETTE</p><h2>What was<br/><i>makeup made of?</i></h2><p>Ancient cosmetics were closer to a small material laboratory than a modern makeup bag.</p></div>
-      <div className="material-grid">
-        <div className="material big"><span className="material-symbol">●</span><strong>GALENA</strong><small>DARK MINERAL PIGMENT</small><p>A lead-bearing mineral used in ancient Egyptian eye cosmetics. Museum records identify it as a major ingredient in black kohl.</p></div>
-        <div className="material"><span className="material-symbol green">◆</span><strong>MALACHITE</strong><small>GREEN MINERAL PIGMENT</small><p>Ground to produce green eye paint.</p></div>
-        <div className="material"><span className="material-symbol red">●</span><strong>OCHRE</strong><small>EARTH PIGMENT</small><p>Natural earth pigments supplied warm red and yellow tones.</p></div>
-        <div className="material"><span className="material-symbol gold">✦</span><strong>OILS + UNGUENTS</strong><small>TEXTURE + SCENT</small><p>Oils and ointments were part of ancient personal-care practices.</p></div>
-      </div>
+    <section id="palette" className="palette">
+      <div className="palette-head"><p className="eyebrow">04 / WHAT'S IN THE BAG?</p><h2>The ancient<br/><i>makeup shelf.</i></h2><p>Tap a material. Think of it as a 3,000-year-old ingredient reveal.</p></div>
+      <div className="material-grid">{materials.map((m,i)=><button className={openMaterial===i?"material open":"material"} key={m[0]} onClick={()=>setOpenMaterial(openMaterial===i?null:i)}><span className={"material-symbol "+(i===1?"green":i===2?"red":"")}>{m[3]}</span><span className="material-no">0{i+1}</span><strong>{m[0]}</strong><small>{m[1]}</small><p>{m[2]}</p><b>{openMaterial===i?"−":"+"}</b></button>)}</div>
     </section>
 
-    <section className="quote"><div className="quote-mark">“</div><blockquote>When the object survives, the ritual becomes visible.</blockquote><p className="quote-credit">A museum-led way of reading beauty history</p><div className="quote-rule"/></section>
+    <section className="big-fact"><span className="big-fact-label">THE PLOT TWIST</span><h2>It wasn't just<br/><i>about looking good.</i></h2><p>Ancient Egyptian eye cosmetics could be decorative, but museum records also connect them with practical and ritual ideas. The same little jar could sit at the intersection of beauty, daily life and belief.</p><a href="https://www.metmuseum.org/art/collection/search/543963" target="_blank" rel="noreferrer">SEE THE BES COSMETIC CONTAINER ↗</a></section>
 
-    <section id="myths" className="myths">
-      <div className="section-head"><div><p className="eyebrow">05 / MYTHS & FACTS</p><h2>Let's clear<br/><i>the powder.</i></h2></div><p>Tap a card to reveal the historical context.</p></div>
-      <div className="fact-grid">{facts.map((f,i)=><button className={open===i?"fact open":"fact"} key={f[0]} onClick={()=>setOpen(open===i?null:i)}><span>0{i+1}</span><div><h3>{f[0]}</h3><p>{f[1]}</p></div><b>{open===i?"−":"+"}</b></button>)}</div>
-    </section>
-
-    <footer>
-      <div><span className="brand-mark">✦</span><h2>ART OF<br/><i>ADORNMENT</i></h2></div>
-      <p>A small visual archive about a very old human ritual.<br/>Objects and claims are linked to museum records.</p>
-      <div className="footer-links"><a href="https://www.metmuseum.org/art/collection/search/560226" target="_blank" rel="noreferrer">The Met ↗</a><a href="https://www.britishmuseum.org/collection/object/Y_EA29336" target="_blank" rel="noreferrer">British Museum ↗</a></div>
-    </footer>
+    <footer><div><span className="brand-mark">✦</span><h2>ART OF<br/><i>ADORNMENT</i></h2></div><p>A visual rabbit hole built from museum objects and records.<br/>Curiosity first. Footnotes when you want them.</p><div className="footer-links"><a href="https://www.metmuseum.org/" target="_blank" rel="noreferrer">The Met ↗</a><a href="https://www.britishmuseum.org/" target="_blank" rel="noreferrer">British Museum ↗</a></div></footer>
   </main>;
 }
