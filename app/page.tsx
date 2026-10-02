@@ -19,7 +19,7 @@ const facts = [
 
 const objects = [
   { image:"https://collectionapi.metmuseum.org/api/collection/v1/iiif/543990/1228612/main-image", title:"Serpentinite Kohl Jar + Applicator", date:"New Kingdom · ca. 1492–1473 BCE", museum:"The Metropolitan Museum of Art", href:"https://www.metmuseum.org/art/collection/search/543990" },
-  { image:"https://collectionapi.metmuseum.org/api/collection/v1/iiif/547624/1222600/main-image", title:"Kohl Tube + Stick", date:"New Kingdom · ca. 1550–1458 BCE", museum:"The Metropolitan Museum of Art", href:"https://www.metmuseum.org/art/collection/search/547624" },
+  { image:"https://collectionapi.metmuseum.org/api/collection/v1/iiif/547624/1228300/main-image", title:"Kohl Tube + Stick", date:"New Kingdom · ca. 1550–1458 BCE", museum:"The Metropolitan Museum of Art", href:"https://www.metmuseum.org/art/collection/search/547624" },
   { image:"https://media.britishmuseum.org/media/Repository/Documents/2014_10/6_15/383bf5ca_0e15_4e2b_98b6_a3bc01047851/mid_00428968_001.jpg", title:"Ancient Egyptian Kohl Jar", date:"18th Dynasty", museum:"The British Museum", href:"https://www.britishmuseum.org/collection/object/Y_EA29336" }
 ];
 
