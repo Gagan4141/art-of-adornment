@@ -20,3 +20,21 @@ footer{padding:75px 8vw;background:#151310;color:var(--paper);display:grid;grid-
 .webgl-field{position:absolute;inset:0;z-index:1;pointer-events:auto;mix-blend-mode:multiply}.hero-art>.webgl-field{opacity:.7}.alchemy>.webgl-field{opacity:.42;z-index:0}.final-reveal>.webgl-field{opacity:.28;z-index:1;mix-blend-mode:screen}.hero-art>.hero-orbit,.hero-art>.hero-face,.hero-art>.hero-words,.hero-art>.hero-note,.hero-art>.hero-stamp{z-index:5}.alchemy-copy,.alchemy-stage,.alchemy-steps{z-index:3}.final-content{z-index:3}
 @media(max-width:800px){.webgl-field{opacity:.38!important}}
 @media(prefers-reduced-motion:reduce){.webgl-field{display:none}}
+
+.illustration-2d{background:#d8cbb8;color:var(--ink);padding:125px 8vw 90px;display:grid;grid-template-columns:.7fr 1.3fr;gap:5vw;align-items:center;overflow:hidden;border-bottom:1px solid var(--line)}
+.illustration-copy h2{font:500 clamp(58px,7vw,100px)/.85 'Playfair Display',serif;letter-spacing:-.06em;margin:16px 0 25px}
+.illustration-copy>p:last-child{max-width:390px;font-size:17px;line-height:1.7;color:#675f54}
+.adornment-2d{width:100%;max-width:720px;justify-self:end}
+.adornment-2d svg{display:block;width:100%;height:auto;overflow:visible}
+.adornment-2d .label{font:500 12px 'DM Mono',monospace;letter-spacing:.14em;fill:#211c17}
+.adornment-2d .sub{font:500 9px 'DM Mono',monospace;letter-spacing:.12em;fill:#756a5b}
+.scene-person{transform-origin:360px 250px;animation:personBreath 4s ease-in-out infinite}
+.kohl-line,.kohl-line-2{stroke-dasharray:120;stroke-dashoffset:120;animation:kohlDraw 2.2s .7s cubic-bezier(.2,.8,.2,1) forwards}
+.brush{transform-origin:112px 423px;animation:brushMove 4.8s ease-in-out infinite}
+.brush-tip{animation:tipPulse 1.8s ease-in-out infinite}
+@keyframes personBreath{50%{transform:translateY(3px)}}
+@keyframes kohlDraw{to{stroke-dashoffset:0}}
+@keyframes brushMove{0%,12%{transform:translate(0,0) rotate(0)}38%,55%{transform:translate(15px,-8px) rotate(-3deg)}72%,100%{transform:translate(0,0) rotate(0)}}
+@keyframes tipPulse{50%{r:8;opacity:.45}}
+@media(max-width:800px){.illustration-2d{grid-template-columns:1fr;padding:90px 7vw 60px;gap:35px}.illustration-copy h2{font-size:60px}.illustration-copy>p:last-child{font-size:16px}.adornment-2d{width:112%;margin-left:-6%}}
+@media(prefers-reduced-motion:reduce){.scene-person,.brush,.brush-tip,.kohl-line,.kohl-line-2{animation:none}.kohl-line,.kohl-line-2{stroke-dashoffset:0}}
